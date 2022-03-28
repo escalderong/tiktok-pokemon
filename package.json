@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "nodemon": "^2.0.15",
+    "tiktok-livestream-chat-connector": "^0.9.15"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  }
+}
