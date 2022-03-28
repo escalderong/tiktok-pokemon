@@ -49,5 +49,12 @@ tiktokChatConnection.on('chat', data => {
 })
 
 setInterval(() => {
-    console.log(currentInputs.up)
-}, 2750);
+    let max = 'up'
+    if(currentInputs.down > currentInputs[max]) max = 'down'
+    if(currentInputs.left > currentInputs[max]) max = 'left'
+    if(currentInputs.right > currentInputs[max]) max = 'right'
+    if(currentInputs.a > currentInputs[max]) max = 'a'
+    if(currentInputs.b > currentInputs[max]) max = 'b'
+    ks.sendKey(max);
+    console.log(max)
+}, 3000);
