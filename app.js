@@ -1,6 +1,8 @@
 const { WebcastPushConnection } = require('tiktok-livestream-chat-connector');
 const ks = require('node-key-sender')
 
+ks.setOption('globalDelayPressMillisec', 600);
+
 let currentInputs = {
     up: {val: 0, key: 'w'},
     down: {val: 0, key: 's'},
@@ -83,4 +85,4 @@ setInterval(() => {
     currentInputs.b.val = 0
     currentInputs.start.val = 0
     currentInputs.select.val = 0
-}, 4500);
+}, 4000);
