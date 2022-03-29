@@ -12,7 +12,9 @@ let currentInputs = {
     start: {val: 0, key: 'x'}
 }
 
-let tiktokUsername = "sakura_fit";
+let max = 'up'
+
+let tiktokUsername = "nixstah";
 
 let tiktokChatConnection = new WebcastPushConnection(tiktokUsername);
 
@@ -34,7 +36,7 @@ tiktokChatConnection.on('chat', data => {
         case 'd':
             currentInputs.down.val++
             break
-        case 'left':
+        case 'left':w
         case 'l':
             currentInputs.left.val++         
             break
@@ -62,7 +64,6 @@ tiktokChatConnection.on('chat', data => {
 })
 
 setInterval(() => {
-    let max = 'up'
     if(currentInputs.down.val > currentInputs[max].val) max = 'down'
     if(currentInputs.left.val > currentInputs[max].val) max = 'left'
     if(currentInputs.right.val > currentInputs[max].val) max = 'right'
@@ -74,7 +75,6 @@ setInterval(() => {
     console.log(max)
     console.log(currentInputs[max].key)
     ks.sendKey(currentInputs[max].key)
-    max = 'up'
     currentInputs.up.val = 0
     currentInputs.down.val = 0
     currentInputs.left.val = 0
@@ -83,4 +83,4 @@ setInterval(() => {
     currentInputs.b.val = 0
     currentInputs.start.val = 0
     currentInputs.select.val = 0
-}, 3560);
+}, 4500);
