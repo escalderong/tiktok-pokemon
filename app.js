@@ -1,15 +1,18 @@
 const { WebcastPushConnection } = require('tiktok-livestream-chat-connector');
+const ks = require('node-key-sender')
 
 let currentInputs = {
-    up: 0,
-    down: 0,
-    left: 0,
-    right: 0,
-    a: 0,
-    b: 0
+    up: {val: 0, key: 'w'},
+    down: {val: 0, key: 's'},
+    left: {val: 0, key: 'a'},
+    right: {val: 0, key: 'd'},
+    a: {val: 0, key: 'q'},
+    b: {val: 0, key: 'e'},
+    select: {val: 0, key: 'z'},
+    start: {val: 0, key: 'x'}
 }
 
-let tiktokUsername = "nixstah";
+let tiktokUsername = "sakura_fit";
 
 let tiktokChatConnection = new WebcastPushConnection(tiktokUsername);
 
@@ -25,24 +28,34 @@ tiktokChatConnection.on('chat', data => {
     switch (checker) {
         case 'up':
         case 'u':
-            currentInputs.up++
+            currentInputs.up.val++
             break
         case 'down':
         case 'd':
-            currentInputs.down++
+            currentInputs.down.val++
             break
         case 'left':
         case 'l':
-            currentInputs.left++            
+            currentInputs.left.val++         
             break
         case 'right':
         case 'r':
-            currentInputs.right++
+            currentInputs.right.val++
+            break
         case 'a':
-            currentInputs.a++            
+            currentInputs.a.val++
             break
         case 'b':
-            currentInputs.b++
+            currentInputs.b.val++
+            break
+        case 'sel':
+        case 'select':    
+            currentInputs.select.val++
+            break
+        case 'st':
+        case 'start':    
+            currentInputs.start.val++
+            break
         default:
             break
     }
@@ -50,10 +63,24 @@ tiktokChatConnection.on('chat', data => {
 
 setInterval(() => {
     let max = 'up'
-    if(currentInputs.down > currentInputs[max]) max = 'down'
-    if(currentInputs.left > currentInputs[max]) max = 'left'
-    if(currentInputs.right > currentInputs[max]) max = 'right'
-    if(currentInputs.a > currentInputs[max]) max = 'a'
-    if(currentInputs.b > currentInputs[max]) max = 'b'
+    if(currentInputs.down.val > currentInputs[max].val) max = 'down'
+    if(currentInputs.left.val > currentInputs[max].val) max = 'left'
+    if(currentInputs.right.val > currentInputs[max].val) max = 'right'
+    if(currentInputs.a.val > currentInputs[max].val) max = 'a'
+    if(currentInputs.b.val > currentInputs[max].val) max = 'b'
+    if(currentInputs.start.val > currentInputs[max].val) max = 'start'
+    if(currentInputs.select.val > currentInputs[max].val) max = 'select'
+    console.log(currentInputs)
     console.log(max)
-}, 3000);
+    console.log(currentInputs[max].key)
+    ks.sendKey(currentInputs[max].key)
+    max = 'up'
+    currentInputs.up.val = 0
+    currentInputs.down.val = 0
+    currentInputs.left.val = 0
+    currentInputs.right.val = 0
+    currentInputs.a.val = 0
+    currentInputs.b.val = 0
+    currentInputs.start.val = 0
+    currentInputs.select.val = 0
+}, 3560);

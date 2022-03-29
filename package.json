@@ -5,5 +5,22 @@
   },
   "scripts": {
     "start": "nodemon app.js"
+  },
+  "name": "tiktok-pokemon",
+  "description": "\"# tiktok-pokemon\"",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/escalderong/tiktok-pokemon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/escalderong/tiktok-pokemon/issues"
+  },
+  "homepage": "https://github.com/escalderong/tiktok-pokemon#readme",
+  "devDependencies": {
+    "node-key-sender": "^1.0.11"
   }
 }
