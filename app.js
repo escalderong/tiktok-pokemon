@@ -1,7 +1,7 @@
 const { WebcastPushConnection } = require('tiktok-livestream-chat-connector');
 const ks = require('node-key-sender')
 
-ks.setOption('globalDelayPressMillisec', 600);
+ks.setOption('globalDelayPressMillisec', 150);
 
 let currentInputs = {
     up: {val: 0, key: 'w'},
@@ -66,23 +66,26 @@ tiktokChatConnection.on('chat', data => {
 })
 
 setInterval(() => {
-    if(currentInputs.down.val > currentInputs[max].val) max = 'down'
-    if(currentInputs.left.val > currentInputs[max].val) max = 'left'
-    if(currentInputs.right.val > currentInputs[max].val) max = 'right'
-    if(currentInputs.a.val > currentInputs[max].val) max = 'a'
-    if(currentInputs.b.val > currentInputs[max].val) max = 'b'
-    if(currentInputs.start.val > currentInputs[max].val) max = 'start'
-    if(currentInputs.select.val > currentInputs[max].val) max = 'select'
-    console.log(currentInputs)
-    console.log(max)
-    console.log(currentInputs[max].key)
-    ks.sendKey(currentInputs[max].key)
-    currentInputs.up.val = 0
-    currentInputs.down.val = 0
-    currentInputs.left.val = 0
-    currentInputs.right.val = 0
-    currentInputs.a.val = 0
-    currentInputs.b.val = 0
-    currentInputs.start.val = 0
-    currentInputs.select.val = 0
-}, 4000);
+    if(currentInputs.up.val > 0 || currentInputs.down.val > 0 || currentInputs.left.val > 0 || currentInputs.right.val > 0 || currentInputs.a.val > 0 || currentInputs.b.val > 0 || currentInputs.down.start > 0 || currentInputs.select.val > 0) {
+        if(currentInputs.up.val > currentInputs[max].val) max = 'up'
+        if(currentInputs.down.val > currentInputs[max].val) max = 'down'
+        if(currentInputs.left.val > currentInputs[max].val) max = 'left'
+        if(currentInputs.right.val > currentInputs[max].val) max = 'right'
+        if(currentInputs.a.val > currentInputs[max].val) max = 'a'
+        if(currentInputs.b.val > currentInputs[max].val) max = 'b'
+        if(currentInputs.start.val > currentInputs[max].val) max = 'start'
+        if(currentInputs.select.val > currentInputs[max].val) max = 'select'
+        console.log(currentInputs)
+        console.log(max)
+        console.log(currentInputs[max].key)
+        ks.sendKey(currentInputs[max].key)
+        currentInputs.up.val = 0
+        currentInputs.down.val = 0
+        currentInputs.left.val = 0
+        currentInputs.right.val = 0
+        currentInputs.a.val = 0
+        currentInputs.b.val = 0
+        currentInputs.start.val = 0
+        currentInputs.select.val = 0
+    }
+}, 5500);
